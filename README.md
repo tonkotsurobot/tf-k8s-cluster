@@ -22,4 +22,3 @@ terraform apply -input=false -var template_name=centos-base -var vm_name=k8s-vm 
 
 #Destroy machine
 terraform destroy -input=false -var template_name=centos-base -var vm_name=k8s-vm -var vmcount=3 -var octet=70 -var vsphere_datastore=esx-nfs-1 -auto-approve
-
