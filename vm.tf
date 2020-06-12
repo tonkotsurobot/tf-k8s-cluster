@@ -13,7 +13,6 @@ resource "vsphere_virtual_machine" "vm" {
   guest_id         = data.vsphere_virtual_machine.template.guest_id
   count            = var.vmcount
   scsi_type = data.vsphere_virtual_machine.template.scsi_type
-  wait_for_guest_ip_timeout = 5
 
   network_interface {
     network_id   = data.vsphere_network.network.id
@@ -40,7 +39,10 @@ resource "vsphere_virtual_machine" "vm" {
         ipv4_address = "${var.ip_address_base}${var.octet + count.index}"
         ipv4_netmask = 24
       }
-
+      
+      dns_server_list = ["192.168.1.254"]
+      dns_suffix_list = ["home"]
+      ipv4_gateway    = "192.168.1.254"
 
     }
   }
