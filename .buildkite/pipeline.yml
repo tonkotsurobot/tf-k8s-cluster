@@ -1,0 +1,12 @@
+  - label: ":bowtie: :github: Read credentials"
+    command: wget http://192.168.1.30:8000/scripts/terraform_vcenter_cred.sh -O /tmp/terraform_vcenter_cred.sh && chmod u+x /tmp/terraform_vcenter_cred.sh
+
+  - wait
+
+  - label: ":rage3: :terraform: Destroy VM"
+    command: . /tmp/terraform_vcenter_cred.sh && terraform init && terraform destroy -input=false -var template_name=centos-base -var vm_name=k8s-vm -var vmcount=3 -var octet=70 -var vsphere_datastore=esx-nfs-1 -auto-approve
+
+  - wait
+
+  - label: ":partyparrot: :partyparrot: :partyparrot: :terraform: Deploy VM"
+    command: . /tmp/terraform_vcenter_cred.sh && terraform init && terraform apply -input=false -var template_name=centos-base -var vm_name=k8s-vm -var vmcount=3 -var octet=70 -var vsphere_datastore=esx-nfs-1 -auto-approve

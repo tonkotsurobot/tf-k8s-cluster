@@ -1,6 +1,6 @@
 terraform {
   backend "local" {
-    path = "/mnt/nfs-drive-1/tf-centos-bkagent-vsphere/terraform.tfstate"
+    path = "/mnt/nfs-drive-1/tf-k8s-cluster/terraform.tfstate"
   }
 }
 
@@ -35,7 +35,10 @@ resource "vsphere_virtual_machine" "vm" {
         domain    = "home"
       }
 
-      network_interface {}
+      network_interface {
+        ipv4_address = "${var.ip_address_base}${var.octet + count.index}"
+        ipv4_netmask = 24
+      }
 
     }
   }
