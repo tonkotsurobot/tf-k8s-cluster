@@ -15,4 +15,4 @@ steps:
   - wait
 
   - label: ":k8s: :k8s: :k8s: Deploy RKE"
-    command: "wget -P ./cluster.yml http://192.168.1.30:8000/scripts/k8s-home-cluster.yml  && rke up"
+    command: "wget http://192.168.1.30:8000/scripts/k8s-home-cluster.yml -O ./cluster.yml && rke up"
