@@ -8,8 +8,8 @@ resource "vsphere_virtual_machine" "vm" {
   name             = "${var.vm_name}-${count.index + 1}"
   datastore_id     = data.vsphere_datastore.datastore.id
   resource_pool_id = data.vsphere_resource_pool.pool.id
-  num_cpus         = 2
-  memory           = 2048
+  num_cpus         = 3
+  memory           = 4096
   guest_id         = data.vsphere_virtual_machine.template.guest_id
   count            = var.vmcount
   scsi_type = data.vsphere_virtual_machine.template.scsi_type
