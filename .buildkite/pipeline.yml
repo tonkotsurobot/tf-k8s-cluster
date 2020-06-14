@@ -14,5 +14,15 @@ steps:
 
   - wait
 
+  - label: "Get SSH credential and RKE configuration file"
+    command: "wget http://192.168.1.30:8000/key/emario_private && wget http://192.168.1.30:8000/scripts/k8s-home-cluster.yml -O ./cluster.yml"
+
+  - wait
+
   - label: ":k8s: :k8s: :k8s: Deploy RKE"
-    command: "wget http://192.168.1.30:8000/key/emario_private && wget http://192.168.1.30:8000/scripts/k8s-home-cluster.yml -O ./cluster.yml && rke up"
+    command: "rke up"
+
+  - wait
+
+  - label: "Export k8s credential files"
+    command: "cp cluster.yml kube_config_cluster.yml cluster.rkestate /mnt/k8s-files/"
