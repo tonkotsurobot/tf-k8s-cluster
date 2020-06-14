@@ -1,9 +1,4 @@
 steps:
-  - trigger: "packer-centos-docker"
-    label: ":sidekiq: :packer: Builds centos-docker VM template"
-      
-  - wait
-
   - label: ":bowtie: :github: Read credentials"
     command: wget http://192.168.1.30:8000/scripts/terraform_vcenter_cred.sh -O /tmp/terraform_vcenter_cred.sh && chmod u+x /tmp/terraform_vcenter_cred.sh
 
@@ -16,3 +11,8 @@ steps:
 
   - label: ":partyparrot: :partyparrot: :partyparrot: :terraform: Deploy VM"
     command: . /tmp/terraform_vcenter_cred.sh && terraform init && terraform apply -input=false -var template_name=centos-docker -var vm_name=k8s-vm -var vmcount=3 -var octet=70 -var vsphere_datastore=esx-nfs-1 -auto-approve
+
+  -wait
+
+  - label: "Deploy RKE"
+     command: "wget -P ./cluster.yml http://192.168.1.30:8000/scripts/k8s-home-cluster.yml  && rke up"
