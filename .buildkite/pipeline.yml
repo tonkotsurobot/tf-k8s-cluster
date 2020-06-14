@@ -12,7 +12,7 @@ steps:
   - label: ":partyparrot: :partyparrot: :partyparrot: :terraform: Deploy VM"
     command: . /tmp/terraform_vcenter_cred.sh && terraform init && terraform apply -input=false -var template_name=centos-docker -var vm_name=k8s-vm -var vmcount=3 -var octet=70 -var vsphere_datastore=esx-nfs-1 -auto-approve
 
-  -wait
+  - wait
 
   - label: ":k8s: :k8s: :k8s: Deploy RKE"
     command: "wget -P ./cluster.yml http://192.168.1.30:8000/scripts/k8s-home-cluster.yml  && rke up"
