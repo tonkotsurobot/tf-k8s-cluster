@@ -1,3 +1,9 @@
+steps:
+  - trigger: "packer-centos-docker"
+    label: ":sidekiq: :packer: Builds centos-docker VM template"
+      
+  - wait
+
   - label: ":bowtie: :github: Read credentials"
     command: wget http://192.168.1.30:8000/scripts/terraform_vcenter_cred.sh -O /tmp/terraform_vcenter_cred.sh && chmod u+x /tmp/terraform_vcenter_cred.sh
 
