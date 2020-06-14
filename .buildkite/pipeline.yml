@@ -14,5 +14,10 @@ steps:
 
   - wait
 
+  - label: "Download credential"
+    command: "wget http://192.168.1.30:8000/key/emario_private && chmod 700 ./emario_private"
+
+  - wait
+
   - label: ":k8s: :k8s: :k8s: Deploy RKE"
     command: "wget http://192.168.1.30:8000/scripts/k8s-home-cluster.yml -O ./cluster.yml && rke up"
