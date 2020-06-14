@@ -14,13 +14,8 @@ steps:
 
   - wait
 
-  - label: "Get SSH credential and RKE configuration file"
-    command: "wget http://192.168.1.30:8000/key/emario_private && wget http://192.168.1.30:8000/scripts/k8s-home-cluster.yml -O ./cluster.yml"
-
-  - wait
-
-  - label: ":k8s: :k8s: :k8s: Deploy RKE"
-    command: "rke up"
+  - label: ":k8s: Get SSH credential and RKE configuration file and build rke"
+    command: "wget http://192.168.1.30:8000/key/emario_private && wget http://192.168.1.30:8000/scripts/k8s-home-cluster.yml -O ./cluster.yml && rke up"
 
   - wait
 

@@ -1,6 +1,6 @@
 terraform {
   backend "local" {
-    path = "/mnt/nfs-drive-1/tf-k8s-cluster/terraform.tfstate"
+    path = "/mnt/tf-k8s-cluster/terraform.tfstate"
   }
 }
 
