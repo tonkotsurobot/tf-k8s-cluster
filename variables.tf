@@ -10,7 +10,6 @@ variable "control" {
   type = "list"
   default = [ ]
 }
-
 variable "worker" {
   type = "list"
   default = [ ]
