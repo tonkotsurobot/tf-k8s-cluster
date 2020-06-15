@@ -7,14 +7,14 @@ steps:
   - wait
 
   - label: ":rage3: :terraform: Destroy VM"
-    command: . /tmp/terraform_vcenter_cred.sh && terraform init && terraform destroy -input=false -var template_name=centos-base -var vsphere_datastore=esx-nfs-1 -auto-approve
+    command: . /tmp/terraform_vcenter_cred.sh && terraform init && terraform destroy -input=false -var template_name=centos-docker -var vsphere_datastore=esx-nfs-1 -auto-approve
     agents:
       home: "true"
 
   - wait
 
   - label: ":partyparrot: :partyparrot: :partyparrot: :terraform: Deploy VM"
-    command: . /tmp/terraform_vcenter_cred.sh && terraform init && terraform apply -input=false -var template_name=centos-base -var vsphere_datastore=esx-nfs-1 -auto-approve
+    command: . /tmp/terraform_vcenter_cred.sh && terraform init && terraform apply -input=false -var template_name=centos-docker -var vsphere_datastore=esx-nfs-1 -auto-approve
     agents:
       home: "true"
 
