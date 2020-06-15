@@ -1,4 +1,5 @@
-Provision a 3 node kubernetes cluster
+Provision a 5 node kubernetes cluster:
+2 control + 3 worker
 
 #Set variables on your build machine
 
