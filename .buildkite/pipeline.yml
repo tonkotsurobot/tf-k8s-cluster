@@ -1,18 +1,26 @@
 steps:
   - label: ":bowtie: :github: Read credentials"
     command: wget http://192.168.1.30:8000/scripts/terraform_vcenter_cred.sh -O /tmp/terraform_vcenter_cred.sh && chmod u+x /tmp/terraform_vcenter_cred.sh
+    agents:
+      home: "true"
 
   - wait
 
   - label: ":rage3: :terraform: Destroy VM"
     command: . /tmp/terraform_vcenter_cred.sh && terraform init && terraform destroy -input=false -var template_name=centos-docker -var vm_name=k8s-vm -var vmcount=3 -var octet=70 -var vsphere_datastore=esx-nfs-1 -auto-approve
+    agents:
+      home: "true"
 
   - wait
 
   - label: ":partyparrot: :partyparrot: :partyparrot: :terraform: Deploy VM"
     command: . /tmp/terraform_vcenter_cred.sh && terraform init && terraform apply -input=false -var template_name=centos-docker -var vm_name=k8s-vm -var vmcount=3 -var octet=70 -var vsphere_datastore=esx-nfs-1 -auto-approve
+    agents:
+      home: "true"
 
   - wait
 
   - label: ":k8s: Get SSH credential and RKE configuration file and build rke"
     command: "wget http://192.168.1.30:8000/key/emario_private && wget http://192.168.1.30:8000/scripts/k8s-home-cluster.yml -O ./cluster.yml && rke up && cp cluster.yml kube_config_cluster.yml cluster.rkestate /mnt/k8s-files/"
+    agents:
+      home: "true"
